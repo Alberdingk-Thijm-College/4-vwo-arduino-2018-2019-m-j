@@ -14,8 +14,9 @@ int speaker = 3;
 
 int knopje = 9;
 int toestand = 0;
+int toestand2 = 0;
 
-void setup(){
+void setup() {
   pinMode( l1g, OUTPUT);
   pinMode( l2g, OUTPUT);
   pinMode( l3g, OUTPUT);
@@ -36,14 +37,14 @@ void loop(){
   digitalWrite( l2g, LOW);
   digitalWrite( l3g, LOW);
   digitalWrite( l4g, LOW);
-  digitalWrite( lsg, LOW);
+  digitalWrite( lsg, LOW); 
   
   digitalWrite( l1r, LOW);
   digitalWrite( l2r, HIGH);
   digitalWrite( l3r, HIGH);
   digitalWrite( l4r, HIGH);
   digitalWrite( lsr, HIGH);
-  delay(2000);
+  vertraging();
   
   digitalWrite( l1g, LOW);
   digitalWrite( l2g, HIGH);
@@ -56,7 +57,7 @@ void loop(){
   digitalWrite( l3r, HIGH);
   digitalWrite( l4r, HIGH);
   digitalWrite( lsr, HIGH);
-  delay(2000);
+  vertraging();
   
   digitalWrite( l1g, LOW);
   digitalWrite( l2g, LOW);
@@ -69,7 +70,7 @@ void loop(){
   digitalWrite( l3r, LOW);
   digitalWrite( l4r, HIGH);
   digitalWrite( lsr, HIGH);
-  delay(2000);
+  vertraging();
   
   digitalWrite( l1g, LOW);
   digitalWrite( l2g, LOW);
@@ -82,14 +83,28 @@ void loop(){
   digitalWrite( l3r, HIGH);
   digitalWrite( l4r, LOW);
   digitalWrite( lsr, HIGH);
-  delay(2000);
+  vertraging();
   
- toestand = digitalRead(knopje);
-  if (toestand == HIGH) 
-  {
-    stoplicht();
-  }
+    if (toestand2 == 1){
+      stoplicht(); 
+      toestand2 = 0; 
+    }
+  
 }
+
+void vertraging(){
+   for (int i=0; i <= 2000; i++){
+    
+   toestand = digitalRead(knopje);
+    if (toestand == HIGH){
+       toestand2 = 1;
+    }
+      delay(1);
+   }
+}
+
+
+
 
 void stoplicht(){
   tone(speaker, 500);
@@ -152,7 +167,3 @@ void lichtstop(){
   digitalWrite( l4r, HIGH);
   digitalWrite( lsr, LOW);
 }
-
-
-
-
